@@ -48,7 +48,7 @@ public class Multiplication
     public int Execute(int a, int b) => a * b;
 };
 
-public abstract class Req
+public class Req
 {
     public int A { get; set; }
     public int B { get; set; }
