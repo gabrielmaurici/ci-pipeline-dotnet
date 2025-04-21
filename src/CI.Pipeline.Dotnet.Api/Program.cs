@@ -1,0 +1,55 @@
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.MapPost("/addition", (Req request) 
+        => new Addition().Execute(request.A, request.B)
+)
+.WithName("Addition")
+.WithOpenApi();
+
+app.MapPost("/subtraction", (Req request) 
+        => new Subtraction().Execute(request.A, request.B)
+)
+.WithName("Subtraction")
+.WithOpenApi();
+
+app.MapPost("/multiplication", (Req request) 
+        => new Multiplication().Execute(request.A, request.B)
+)
+.WithName("Multiplication")
+.WithOpenApi();
+
+app.Run();
+
+public class Addition
+{
+    public int Execute(int a, int b) => a + b;
+};
+
+public class Subtraction
+{
+    public int Execute(int a, int b) => a - b;
+};
+
+public class Multiplication
+{
+    public int Execute(int a, int b) => a * b;
+};
+
+public abstract class Req
+{
+    public int A { get; set; }
+    public int B { get; set; }
+}
