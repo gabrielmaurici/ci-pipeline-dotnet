@@ -11,6 +11,6 @@ public class AdditionTest
 
         var result = addition.Execute(a, b);
         
-        Assert.Equal(15, result);
+        Assert.Equal(1, result);
     }
 }
