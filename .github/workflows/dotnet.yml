@@ -41,6 +41,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ./src/CI.Pipeline.Dotnet.Api/.
+          context: ./src/CI.Pipeline.Dotnet.Api
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/ci-pipeline-dotnet:latest
