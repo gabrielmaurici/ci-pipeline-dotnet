@@ -42,5 +42,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./src/CI.Pipeline.Dotnet.Api
+          file: ./src/CI.Pipeline.Dotnet.Api/Dockerfile
           push: true
           tags: ${{ vars.DOCKER_USERNAME }}/ci-pipeline-dotnet:latest
