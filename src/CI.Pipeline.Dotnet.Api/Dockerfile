@@ -7,10 +7,11 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/CI.Pipeline.Dotnet.Api/CI.Pipeline.Dotnet.Api.csproj", "src/CI.Pipeline.Dotnet.Api/"]
-RUN dotnet restore "src/CI.Pipeline.Dotnet.Api/CI.Pipeline.Dotnet.Api.csproj"
-COPY . .
-WORKDIR "/src/src/CI.Pipeline.Dotnet.Api"
+
+COPY ["CI.Pipeline.Dotnet.Api.csproj", "."]
+RUN dotnet restore "CI.Pipeline.Dotnet.Api.csproj"
+
+COPY . . 
 RUN dotnet build "CI.Pipeline.Dotnet.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
