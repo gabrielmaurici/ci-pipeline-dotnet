@@ -44,4 +44,5 @@ jobs:
           context: ./src/CI.Pipeline.Dotnet.Api
           file: ./src/CI.Pipeline.Dotnet.Api/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ vars.DOCKER_USERNAME }}/ci-pipeline-dotnet:latest
