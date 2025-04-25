@@ -70,9 +70,9 @@ jobs:
             /o:"gabrielmaurici" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.host.url="https://sonarcloud.io" `
-            /d:sonar.cs.opencover.reportsPaths="**/coverage.cobertura.xml"
+            /d:sonar.cs.opencover.reportsPaths="coverage.xml"
           dotnet build --no-incremental
-          coverlet .\src\CI.Pipeline.Dotnet.Tests\bin\Debug\net8.0\CI.Pipeline.Dotnet.Tests.dll `
+          coverlet .\src\CI.Pipeline.Dotnet.Api.Tests\bin\Debug\net8.0\CI.Pipeline.Dotnet.Api.Tests.dll `
           --target "dotnet" `
           --targetargs "test --no-build" `
           -f=opencover `
