@@ -28,7 +28,19 @@ app.MapPost("/multiplication", (Req request)
 .WithName("Multiplication")
 .WithOpenApi();
 
+app.MapPost("/division", (Req request)
+    => new Division().Execute(request.A, request.B)
+)
+    .WithName("Division")
+    .WithOpenApi();
+
 app.Run();
+
+app.MapPost("/power", (Req request)
+        => new Power().Execute(request.A, request.B)
+)
+.WithName("Power")
+.WithOpenApi();
 
 public class Addition
 {
@@ -43,6 +55,22 @@ public class Subtraction
 public class Multiplication
 {
     public int Execute(int a, int b) => a * b;
+};
+
+public class Division
+{
+    public int Execute(int a, int b)
+    {
+        if (b == 0)
+            return 0;
+
+        return a / b;
+    }
+}
+
+public class Power
+{
+    public double Execute(int a, int b) => Math.Pow(a, b);
 };
 
 public class Req
