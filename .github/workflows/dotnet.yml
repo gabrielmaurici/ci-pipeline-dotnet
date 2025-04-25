@@ -9,6 +9,7 @@ on:
 
 jobs:
   build-and-tests:
+    name: Build and Tests
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
@@ -25,9 +26,8 @@ jobs:
         run: dotnet test --no-build --verbosity normal
     
   sonar:
-    name: Build and analyze
+    name: Sonar
     runs-on: windows-latest
-    needs: build-and-tests
     if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     steps:
       - name: Set up JDK 17
@@ -67,7 +67,9 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"    
       
   docker:
+    name: Docker
     runs-on: ubuntu-latest
+    needs: sonar
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
