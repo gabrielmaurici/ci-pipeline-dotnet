@@ -1,3 +1,5 @@
+using CI.Pipeline.Dotnet.Api.Domain;
+
 namespace CI.Pipeline.Dotnet.Api.Tests;
 
 public class SubtractionTest
@@ -7,6 +9,7 @@ public class SubtractionTest
     {
         var a = 20;
         var b = 10;
+        
         var subtraction = new Subtraction();
         
         var result = subtraction.Execute(a, b);
