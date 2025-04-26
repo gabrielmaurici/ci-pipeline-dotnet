@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using CI.Pipeline.Dotnet.Api.Domain;
 
+namespace CI.Pipeline.Dotnet.Api;
 
 [ExcludeFromCodeCoverage]
 public class Program
