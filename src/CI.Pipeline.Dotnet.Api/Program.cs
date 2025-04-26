@@ -1,46 +1,55 @@
-var builder = WebApplication.CreateBuilder(args);
+using System.Diagnostics.CodeAnalysis;
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+[ExcludeFromCodeCoverage]
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+        var app = builder.Build();
 
-app.UseHttpsRedirection();
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
-app.MapPost("/addition", (Req request) 
-        => new Addition().Execute(request.A, request.B)
-)
-.WithName("Addition")
-.WithOpenApi();
+        app.UseHttpsRedirection();
 
-app.MapPost("/subtraction", (Req request) 
-        => new Subtraction().Execute(request.A, request.B)
-)
-.WithName("Subtraction")
-.WithOpenApi();
+        app.MapPost("/addition", (Req request) 
+                => new Addition().Execute(request.A, request.B)
+        )
+        .WithName("Addition")
+        .WithOpenApi();
 
-app.MapPost("/multiplication", (Req request) 
-        => new Multiplication().Execute(request.A, request.B)
-)
-.WithName("Multiplication")
-.WithOpenApi();
+        app.MapPost("/subtraction", (Req request) 
+            => new Subtraction().Execute(request.A, request.B)
+        )
+        .WithName("Subtraction")
+        .WithOpenApi();
 
-app.MapPost("/division", (Req request)
-    => new Division().Execute(request.A, request.B)
-)
-    .WithName("Division")
-    .WithOpenApi();
+        app.MapPost("/multiplication", (Req request) 
+            => new Multiplication().Execute(request.A, request.B)
+        )
+        .WithName("Multiplication")
+        .WithOpenApi();
 
-app.Run();
+        app.MapPost("/division", (Req request)
+            => new Division().Execute(request.A, request.B)
+        )
+        .WithName("Division")
+        .WithOpenApi();
 
-app.MapPost("/power", (Req request)
-        => new Power().Execute(request.A, request.B)
-)
-.WithName("Power")
-.WithOpenApi();
+        app.MapPost("/power", (Req request)
+                => new Power().Execute(request.A, request.B)
+            )
+            .WithName("Power")
+            .WithOpenApi();
+        
+        app.Run();
+    }
+}
 
 public class Addition
 {
