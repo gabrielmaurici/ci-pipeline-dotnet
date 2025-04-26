@@ -1,3 +1,5 @@
+using CI.Pipeline.Dotnet.Api.Domain;
+
 namespace CI.Pipeline.Dotnet.Api.Tests;
 
 public class DivisionTest
