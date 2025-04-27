@@ -18,4 +18,9 @@ A pipeline de CI no GitHub Actions executa as seguintes etapas:
 
 ## 🚀 Resultado
 
-![pipeline](./images/pipeline.png)
+### Sucesso na Pipeline
+Obs: Ao realizar PR são acionadas apenas as esteiras de build, testes, e sonar. Ao realizar o merge da PR na branch main, é acionado a esteira do sonar novamente, caso aprovada segue para a última esteira de build e push do Docker, se reprovada a esteira do Docker não é iniciada.
+![pipeline-pr](images/pipeline-pr.png)
+![pipeline-sucesso-pr](images/pr-success.png)
+![sonar-sucesso-pr](images/sonar-success.png)
+![docker-hub](images/docker-hub.png)
