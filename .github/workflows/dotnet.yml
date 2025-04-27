@@ -57,6 +57,9 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Install coverlet.console
+        shell: powershell
+        run: dotnet tool install --global coverlet.console
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -67,9 +70,13 @@ jobs:
             /o:"gabrielmaurici" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.host.url="https://sonarcloud.io" `
-            /d:sonar.cs.opencover.reportsPaths="**/coverage.cobertura.xml"
-          dotnet build
-          dotnet test --no-build --collect:"XPlat Code Coverage"
+            /d:sonar.cs.opencover.reportsPaths="coverage.xml"
+          dotnet build --no-incremental
+          coverlet .\src\CI.Pipeline.Dotnet.Api.Tests\bin\Debug\net8.0\CI.Pipeline.Dotnet.Api.Tests.dll `
+          --target "dotnet" `
+          --targetargs "test --no-build" `
+          -f=opencover `
+          -o="coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"    
       
   docker:
